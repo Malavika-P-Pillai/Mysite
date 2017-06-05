@@ -1,0 +1,26 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Index</title>
+    <link href="{% static 'polls/css/style.css'%}" rel="stylesheet">
+</head>
+<body>
+
+<center>
+{% for i in object_list %}
+    <a class="text" href="/{{ i.id}}">{{ i.question_text }}</a>
+    <p class="date">{{ i.pub_date }}</p>
+
+{% endfor %}
+
+<img src="{% static 'polls/images/dog.jpg' %}" />
+
+</center>
+
+
+</body>
+</html>

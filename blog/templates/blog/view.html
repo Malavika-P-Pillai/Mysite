@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DETAIL</title>
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+</head>
+<body>
+<center>
+<h1 class="text">{{ post.title }}</h1>
+<p>{{ post.description }}</p>
+<h3 class="text" > {{post.date_created}}</h3>
+
+
+<img height="300px" src="/media/{{ post.img }}"/>
+</center>
+<h1 class="text">COMMENTS:</h1>
+<ul>
+{% for i in comments %}
+    <li> <p>{{ i.comment_text }}</p></li>
+
+{% endfor %}
+</ul>
+
+</body>
+</html>
