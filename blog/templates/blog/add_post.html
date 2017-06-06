@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>ADD POST</title>
 </head>
 <body>
-$END$
+<center>
+<h1>Add A New Post</h1>
+<p> {{ request.user.username }} </p>
+
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Title</p>
+    <textarea rows ="3" cols= "150" name= "title"></textarea>
+    <p>Description</p>
+    <textarea rows ="20" cols= "150" name= "description"></textarea>
+
+    <p>Img File</p>
+    <input name="img" type="file">
+    <p>Is Published</p>
+    <input type="checkbox" value=True name="is_published">
+    <br>
+    <input type="submit">
+</form>
+</center>
+
 </body>
 </html>

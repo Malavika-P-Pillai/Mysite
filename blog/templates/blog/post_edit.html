@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>POST EDIT</title>
 </head>
 <body>
-$END$
+<center>
+    <h1>Edit Post</h1>
+<p> {{ request.user.username }} </p>
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Title</p>
+    <textarea rows ="3" cols= "150" name= "title">{{ post.title }}</textarea>
+    <p>Description</p>
+    <textarea rows ="20" cols= "150" name= "description">{{ post.description }}</textarea>
+    {% if post.img %}
+        <p>Image: {{ post.img }}</p>
+    {% endif %}
+    <input name="img" type="file" value="{{ post.img }}">
+    <p>Is Published</p>
+    <input type="checkbox" value=True name="is_published">
+    <br>
+    <input type="submit">
+</form>
+</center>
+
 </body>
 </html>

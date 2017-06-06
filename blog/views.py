@@ -2,7 +2,10 @@
 from __future__ import unicode_literals
 
 import generic as generic
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.core.exceptions import PermissionDenied
+
+from django.shortcuts import render, redirect
 from django.views import generic
 # Create your views here.
 from blog.models import Post, Comment
@@ -21,7 +24,72 @@ class PostDetailView(generic.DetailView):
         comment = Comment.objects.filter(post=context['post'])
         context['comments'] = comment
 
+        if request.method == "POST":
+            comment_text = request.POST['comment']
+            user = User.objects.get(username=request.user.username)
+            post = Comment(comment_text=comment_text, user=user)
+            return redirect('view_post', post.id)
         return context
+
+
+def add_post(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        description = request.POST['description']
+        img = request.FILES['img']
+        is_published = request.POST['is_published']
+        user = User.objects.get(username=request.user.username)
+        new_post = Post(title=title, description=description, img=img, is_published=is_published, user=user)
+        new_post.save()
+        return redirect('view_post',new_post.id)
+    else:
+        template = 'blog/add_post.html'
+        context = {}
+        return render(request, template, context)
+
+
+
+def edit_post(request,pk):
+    post = Post.objects.get(id=int(pk))
+    if request.user.username != post.user.username:
+        raise PermissionDenied
+    if request.method == "GET":
+        template = 'blog/post_edit.html'
+        context = {'post':post}
+        return render(request,template,context)
+    else:
+        post.title = request.POST['title']
+        post.description = request.POST['description']
+
+        if 'img' in request.FILES:
+            post.img = request.FILES["img"]
+        if 'is_published' in request.POST:
+            post.is_published = request.POST['is_published']
+
+        post.save()
+        return redirect('view_post', post.id)
+
+
+def del_post(request,pk):
+    post = Post.objects.get(id=int(pk))
+    if request.user.username != post.user.username:
+        raise PermissionDenied
+    if post is not None:
+        post.delete()
+        return redirect('Home')
+
+
+"""
+class AddPost(generic.CreateView):
+    model=Post
+    template_name = "blog/add_post.html"
+    fields = [title...]
+    success_url = '/blog'
+    
+class DeletePostView(generic.DeleteView):
+    model=Post
+    success_url = '/'
+"""
 
 """def home(request):
     posts = Post.objects.all()

@@ -27,6 +27,13 @@
 
                         {% endfor %}
                     </ul>
+                    <form>
+                        <textarea rows ="5" cols= "50" name= "comment">Comments</textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+
+                    <a href="{% url 'edit_post' post.id %}"><button>Edit</button>
+                    <a href="{% url 'del_post' post.id %}"><button>Delete</button>
                 </div>
             </div>
         </div>
