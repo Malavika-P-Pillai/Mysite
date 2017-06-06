@@ -2,12 +2,11 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from blog import views
-from blog.views import home
-
+from blog.views import PostListView, PostDetailView
 
 urlpatterns = [
 
-    url(r'^post/$', home, name='home'),
-    url(r'^post/(?P<id>[0-9]+)/$', views.view_post, name="view_post"),
+    url(r'^post/$', PostListView.as_view(), name='Home'),
+    url(r'^post/(?P<pk>[0-9]+)/$', PostDetailView.as_view(), name="view_post"),
 
 ]

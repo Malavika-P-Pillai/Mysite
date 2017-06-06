@@ -1,18 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HOME</title>
-</head>
-<body>
+{% extends 'blog/base.html' %}
 
-{% for post in posts %}
-    <a href="{{ post.id}}/">{{ post.title }}</a>
+{% block title %} HOME {% endblock %}
 
-    <h1></h1>
-    <p>{{ post.description }}</p>
-{% endfor %}
+{% block body %}
+
+    {% include 'blog/nav_bar.html'%}
 
 
-</body>
-</html>
+    <div id="cover">
+        <h1 id="cover-text">Welcome</h1>
+        <h3 id="cover-subtext">Welcome to my Blog</h3>
+    </div>
+    <div class="post-div">
+    <div id="posts">
+        <div class="container-fluid">
+            <div class="row">
+
+                    {% for post in object_list %}
+                        <div class="col-md-4 col-sm-6">
+                        <h3><a href="{{ post.id}}/">{{ post.title }}</a></h3>
+                        <img src="/media/{{ post.img }}" class="img-responsive img" alt="Responsive image">
+                        <p>{{ post.description }}</p>
+                        </div>
+                    {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container-fluid">
+            <div class="footer-data">
+
+                <p> Created by Malavika P Pillai</p>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
