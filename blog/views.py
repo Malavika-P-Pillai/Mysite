@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 
 
 
-import generic as generic
+
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 
