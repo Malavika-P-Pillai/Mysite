@@ -27,9 +27,12 @@
 
                         {% endfor %}
                     </ul>
-                    <form>
-                        <textarea rows ="5" cols= "50" name= "comment">Comments</textarea>
-                        <button type="submit">Submit</button>
+                    <form method="POST"  action="">
+                        {% csrf_token %}
+
+                        <textarea rows ="5" cols= "50" name= "comment_text">Comments</textarea>
+                        <button type="submit">submit</button>
+
                     </form>
 
                     <a href="{% url 'edit_post' post.id %}"><button>Edit</button>
