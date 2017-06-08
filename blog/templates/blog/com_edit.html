@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Comment</title>
+</head>
+<body>
+    <center>
+    <h1>Edit Comment</h1>
+<p> {{ request.user.username }} </p>
+<form method="POST" action="" >
+    {% csrf_token %}
+    <p>Comment</p>
+    <textarea rows ="3" cols= "150" name= "comment_text">{{ comment.comment_text }}</textarea>
+
+    <input type="submit">
+</form>
+    </center>
+
+</body>
+</html>

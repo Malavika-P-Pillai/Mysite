@@ -20,7 +20,7 @@
                         <div class="col-md-4 col-sm-6">
                         <h3><a href="{{ post.id}}/">{{ post.title }}</a></h3>
                         <img src="/media/{{ post.img }}" class="img-responsive img" alt="Responsive image">
-                        <p>{{ post.description }}</p>
+                            <p>{{ post.description }}...<a href="{% url 'view_post' post.id}">read more</a></p>
                         </div>
                     {% endfor %}
 

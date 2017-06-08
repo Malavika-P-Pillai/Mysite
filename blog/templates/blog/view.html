@@ -24,6 +24,8 @@
                     <ul>
                         {% for i in comments %}
                             <li> <p>{{ i.comment_text }}</p></li>
+                            <a href="{% url 'del_com' post.id i.id%}"><button>Delete</button></a>
+                            <a href="{% url 'edit_com' post.id i.id%}"><button>Edit</button></a>
 
                         {% endfor %}
                     </ul>
@@ -31,7 +33,7 @@
                         {% csrf_token %}
 
                         <textarea rows ="5" cols= "50" name= "comment_text">Comments</textarea>
-                        <button type="submit">submit</button>
+                        <input type="submit">
 
                     </form>
 

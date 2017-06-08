@@ -1,5 +1,5 @@
 #cover {
-    background-image: url('../img/tree.jpg');
+    background-image: url('../img/book.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height:500px;
@@ -70,4 +70,8 @@
 
 .footer-data a {
     color: white;
+}
+body
+{
+    background-color: black;
 }

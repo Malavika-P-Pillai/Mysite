@@ -39,6 +39,8 @@ class PostDetailView(generic.DetailView):
             new_comment.save()
             return redirect('view_post', post.id)
 
+
+
 def signup(request):
     template = 'registration/signup.html'
     context = {}
@@ -143,14 +145,29 @@ def del_post(request,pk):
         post.delete()
         return redirect('Home')
 
-def del_comment(request,pk):
+def del_comment(request,pk,cn):
     post = Post.objects.get(id=int(pk))
-    comment = Comment.objects.filter(post=post)
+    comment = Comment.objects.filter(id=int(cn),post=post)
     if request.user.username != post.user.username:
         raise PermissionDenied
     if comment is not None:
         comment.delete()
-        return redirect('Home')
+        return redirect('view_post', post.id)
+
+def edit_comment(request,pk,cn):
+    post = Post.objects.get(id=int(pk))
+    comment = Comment.objects.filter(id=int(cn), post=post)
+    if request.user.username != comment.user.username:
+        raise PermissionDenied
+    if request.method == "GET":
+        template = 'blog/com_edit.html'
+        context = {'comment':comment}
+        return render(request,template,context)
+    else:
+        comment.comment_text = request.POST['comment_text']
+        comment.save()
+        return redirect('view_post', post.id)
+
 
 
 """
