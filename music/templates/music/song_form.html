@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Song</title>
+</head>
+<body>
+<center>
+<h1>Add A New Song</h1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit">
+</form>
+
+</center>
+
+
+</body>
+</html>

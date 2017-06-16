@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ALBUMS</title>
+</head>
+<body>
+
+<center>
+<h1 style="color:black"> ALBUM LIST </h1>
+{% for i in object_list %}
+
+    <img height="150px" src="/media/{{ i.img }}">
+    <a href="/music/{{ i.pk }} "><p>Name:{{ i.name }}</p></a>
+
+
+
+{% endfor %}
+</center>
+</body>
+</html>
